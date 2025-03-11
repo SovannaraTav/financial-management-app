@@ -1,25 +1,17 @@
-import { View, Pressable, Text, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import { View, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import IntroNavigationButton from "@/components/IntroNavigationButton";
 
 export default function Index() {
     return (
         // Sets the background of the introduction screen to a blue to pink linear gradient
         <LinearGradient colors={["#4A90E2", "#FF69B4"]} style={styles.gradient}>
             <View style={styles.container}>
-                {/* Button to the sign-up screen */}
-                <Link href="/sign-in" asChild>
-                    <Pressable style={styles.button}>
-                        <Text style={styles.buttonText}>Sign In</Text>
-                    </Pressable>
-                </Link>
+                {/* Navigation button to the sign-in screen */}
+                <IntroNavigationButton path="/sign-in" buttonText="Sign In" />
 
-                {/* Button to the sign-up screen */}
-                <Link href="/sign-up" asChild>
-                    <Pressable style={styles.button}>
-                        <Text style={styles.buttonText}>Sign Up</Text>
-                    </Pressable>
-                </Link>
+                {/* Navigation button to the sign-up screen */}
+                <IntroNavigationButton path="/sign-up" buttonText="Sign Up" />
             </View>
         </LinearGradient>
     );
@@ -35,17 +27,4 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    button: {
-        width: 250,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "white",
-        borderRadius: 5,
-        paddingVertical: 10,
-        marginVertical: 10,
-    },
-    buttonText: {
-        fontSize: 20,
-        fontWeight: "bold",
-    }
 });
