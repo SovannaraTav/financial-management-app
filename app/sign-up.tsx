@@ -9,6 +9,7 @@ export default function SignUp() {
                 <AuthenticationForm 
                     buttonText="Sign Up" 
                     onSubmit={(email, password) => console.log(email, password)}
+                    isSigningUp
                 />
             </View>
         </LinearGradient>
