@@ -1,14 +1,54 @@
-import { View, StyleSheet } from "react-native";
+import { View, Alert, StyleSheet, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { auth } from "@/firebaseConfig";
+import { signInWithEmailAndPassword, AuthError } from "firebase/auth";
 import AuthenticationForm from "@/components/AuthenticationForm";
 
 export default function SignIn() {
+    /*
+    Handler function to attempt to sign in an existing user with their provided account 
+    credentials through Google Firebase Auth and displays a corresponding alert
+    */
+    const handleSignIn = async (email: string, password: string) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+
+            if (Platform.OS === "web") {
+                alert("[Sign In Status]: Successful");
+            }
+            else {
+                Alert.alert("[Sign In Status]: Successful");
+            }
+        }
+        catch (e) {
+            const error = e as AuthError;
+            let errorMessage = "";
+
+            switch (error.code) {
+                case "auth/invalid-credential":
+                    errorMessage = 
+                        "The provided email is not associated with an account or incorrect credentials provided";
+                    break;
+                default:
+                    errorMessage = "An unexpected error occured";
+                    break;
+            }
+
+            if (Platform.OS === "web") {
+                alert(`[Sign In Status]: Unsuccessful. ${errorMessage}`);
+            }
+            else {
+                Alert.alert(`[Sign In Status]: Unsuccessful. ${errorMessage}`);
+            }
+        }
+    };
+
     return (
         <LinearGradient colors={["#4A90E2", "#FF69B4"]} style={styles.gradient}>
             <View style={styles.container}>
                 <AuthenticationForm 
                     buttonText="Sign In" 
-                    onSubmit={(email, password) => console.log(email, password)}
+                    onSubmit={handleSignIn}
                 />
             </View>
         </LinearGradient>

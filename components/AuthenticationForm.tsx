@@ -46,7 +46,7 @@ export default function AuthenticationForm({ buttonText, onSubmit, isSigningUp }
         if (isSigningUp) {
             setPasswordError(!passwordRegex.test(passwordInput));
         }
-    }
+    };
 
     return (
         <View style={styles.container}>
