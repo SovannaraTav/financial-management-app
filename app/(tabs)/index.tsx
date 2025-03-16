@@ -1,10 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
+import SignOutButton from "@/components/SignOutButton";
 
 export default function Info()
 {
     return (
         <View style={styles.container}>
             <Text>Info Screen.</Text>
+            <SignOutButton />
         </View>
     );
 }
