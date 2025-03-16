@@ -1,13 +1,18 @@
 import { View, Alert, StyleSheet, Platform } from "react-native";
+import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { auth } from "@/firebaseConfig";
 import { signInWithEmailAndPassword, AuthError } from "firebase/auth";
 import AuthenticationForm from "@/components/AuthenticationForm";
 
 export default function SignIn() {
+    // Initialized router instance to enable navigation between screens
+    const router = useRouter();
+
     /*
     Handler function to attempt to sign in an existing user with their provided account 
-    credentials through Google Firebase Auth and displays a corresponding alert
+    credentials through Google Firebase Auth and displays a corresponding alert. If
+    successful, the user is redirected to the main screen of the app
     */
     const handleSignIn = async (email: string, password: string) => {
         try {
@@ -15,9 +20,12 @@ export default function SignIn() {
 
             if (Platform.OS === "web") {
                 alert("[Sign In Status]: Successful");
+                router.replace("/(tabs)");
             }
             else {
-                Alert.alert("[Sign In Status]: Successful");
+                Alert.alert("[Sign In Status]:", "Successful", [
+                    { text: "Ok", onPress: () => router.replace("/(tabs)") }
+                ]);
             }
         }
         catch (e) {

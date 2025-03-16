@@ -1,0 +1,19 @@
+import { View, Text, StyleSheet } from "react-native";
+
+export default function Analytics()
+{
+    return (
+        <View style={styles.container}>
+            <Text>Analytics Screen.</Text>
+        </View>
+    );
+}
+
+// Styling properties and values for the analytics screen
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    }
+});
