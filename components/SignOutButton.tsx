@@ -1,5 +1,6 @@
-import { Alert, Button, Platform } from "react-native";
+import { Alert, Pressable, StyleSheet, Platform } from "react-native";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { auth } from "@/firebaseConfig";
 import { signOut, AuthError } from "firebase/auth";
 
@@ -40,6 +41,15 @@ export default function SignOutButton()
     }
 
     return (
-        <Button title="Sign Out" onPress={handleSignOut} />
+        <Pressable onPress={handleSignOut} style={styles.container}>
+            {() => (<Ionicons name="log-out-outline" size={28} color="#007bff" />)}
+        </Pressable>
     );
 }
+
+// Styling properties and values for the SignOutButton component
+const styles = StyleSheet.create({
+    container: {
+        marginRight: 10,
+    }
+});

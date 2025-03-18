@@ -6,7 +6,6 @@ export default function Analytics()
     return (
         <View style={styles.container}>
             <Text>Analytics Screen.</Text>
-            <SignOutButton />
         </View>
     );
 }

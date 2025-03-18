@@ -6,7 +6,6 @@ export default function Info()
     return (
         <View style={styles.container}>
             <Text>Info Screen.</Text>
-            <SignOutButton />
         </View>
     );
 }
