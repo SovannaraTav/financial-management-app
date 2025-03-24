@@ -56,7 +56,7 @@ export default function AuthenticationForm({ buttonText, onSubmit, isSigningUp }
                 style={styles.textInput} 
                 keyboardType="email-address"
                 placeholder="Enter email address here"
-                placeholderTextColor={"gray"}
+                placeholderTextColor="gray"
                 onChangeText={handleEmailChange}
                 value={email}
             />
@@ -69,7 +69,7 @@ export default function AuthenticationForm({ buttonText, onSubmit, isSigningUp }
                 style={styles.textInput} 
                 secureTextEntry={true}
                 placeholder="Enter password here"
-                placeholderTextColor={"gray"}
+                placeholderTextColor="gray"
                 onChangeText={handlePasswordChange}
                 value={password}
             />
