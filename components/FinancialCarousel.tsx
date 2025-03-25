@@ -56,7 +56,7 @@ export default function FinancialCarousel({ sections } : Props)
 // Styling properties and values for the FinancialCarousel component
 const styles = StyleSheet.create({
     sectionTitle: {
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
     }
