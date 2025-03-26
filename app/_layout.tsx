@@ -7,9 +7,9 @@ export default function RootLayout() {
             <StatusBar style="dark" />
             <Stack>
                 {/* Main screen of the app upon opening it */}
-                <Stack.Screen name="index" options={{ title: "Introduction Screen" }} />
-                <Stack.Screen name="sign-in" options={{ title: "Sign-In Screen" }} />
-                <Stack.Screen name="sign-up" options={{ title: "Sign-Up Screen" }} />
+                <Stack.Screen name="index" options={{ title: "Introduction" }} />
+                <Stack.Screen name="sign-in" options={{ title: "Sign-In" }} />
+                <Stack.Screen name="sign-up" options={{ title: "Sign-Up" }} />
 
                 {/* Tab navigator component of the app upon successfully signing in */}
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

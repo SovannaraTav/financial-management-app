@@ -15,7 +15,7 @@ export default function TabLayout() {
             <Tabs.Screen 
                 name="index" 
                 options={{ 
-                    title: "Info Screen",
+                    title: "Info",
                     headerRight: () => <SignOutButton />,
                     tabBarIcon: ({ focused, color }) => ( 
                         <Ionicons 
@@ -28,7 +28,7 @@ export default function TabLayout() {
             <Tabs.Screen 
                 name="financials" 
                 options={{ 
-                    title: "Financials Screen",
+                    title: "Financials",
                     headerRight: () => <SignOutButton />,
                     tabBarIcon: ({ focused, color }) => ( 
                         <Ionicons 
@@ -41,7 +41,7 @@ export default function TabLayout() {
             <Tabs.Screen 
                 name="analytics" 
                 options={{ 
-                    title: "Analytics Screen",
+                    title: "Analytics",
                     headerRight: () => <SignOutButton />,
                     tabBarIcon: ({ focused, color }) => ( 
                         <Ionicons 

@@ -1,4 +1,4 @@
-import { Dimensions, View, Text, StyleSheet } from "react-native";
+import { Dimensions, View, Text, StyleSheet, Platform } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel, { Pagination } from "react-native-reanimated-carousel";
 import FinancialSubsection from "./FinancialSubsection";
@@ -27,7 +27,7 @@ export default function FinancialCarousel({ sections } : Props)
             respective subsections separately */}
             <Carousel 
                 width={width}
-                height={height * 0.6}
+                height={Platform.OS !== "web" ? height * 0.6 : height * 0.7}
                 data={sections}
                 onProgressChange={progress}
                 renderItem={({ item }) => (
