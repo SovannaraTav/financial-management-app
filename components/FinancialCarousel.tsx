@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Dimensions, View, Text, StyleSheet, Platform } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel, { Pagination } from "react-native-reanimated-carousel";
@@ -6,10 +7,18 @@ import FinancialSubsection from "./FinancialSubsection";
 /*
 Props for FinancialCarousel component:
 1) Establishes the different financial sections with their respective subsections 
-to serve as the data to be display
+alongside fields such as id, title, and amount to serve as the data to be display
 */
 type Props = {
-    sections: { title: string, subsections: { title: string }[] }[];
+    sections: { 
+        id: string;
+        title: string; 
+        subsections: { 
+            id: string;
+            title: string;
+            amount: number;
+        }[] 
+    }[];
 };
 
 // Retrieves the screen's width and height properties for responsive layout
@@ -20,6 +29,32 @@ export default function FinancialCarousel({ sections } : Props)
 {
     // Keeps track of the carousel's progress for the pagination dots
     const progress = useSharedValue<number>(0);
+
+    /*
+    State variable to keep track of the amounts of the different financial sections 
+    with their respective subsections
+    */
+    const [financialData, setFinancialData] = useState(sections);
+
+    /*
+    Handler function to update the amounts of the different financial sections with 
+    their respective subsections that were edited and maintaining the amounts that 
+    were left unchanged
+    */
+    const handleSave = (sectionId: string, subsectionId: string,  updatedAmount: number) => {
+        setFinancialData((prev) =>
+            prev.map((section) => 
+                section.id === sectionId ? {
+                    ...section, 
+                    subsections: section.subsections.map(subsection => 
+                        subsection.id === subsectionId ? {
+                            ...subsection, amount: updatedAmount
+                        } : subsection
+                    )
+                } : section
+            )
+        );
+    };
 
     return (
         <View>
@@ -34,7 +69,14 @@ export default function FinancialCarousel({ sections } : Props)
                     <View>
                         <Text style={styles.sectionTitle}>{item.title}</Text>
                         {item.subsections.map((subsection, index) => (
-                            <FinancialSubsection title={subsection.title} key={index} />
+                            <FinancialSubsection 
+                                key={index}
+                                sectionId={item.id}
+                                subsectionId={subsection.id}
+                                title={subsection.title} 
+                                amount={subsection.amount}
+                                onSave={handleSave}
+                            />
                         ))}
                     </View>
                 )}
