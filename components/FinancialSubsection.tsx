@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet, Platform } from "react-native";
 import EditSaveIcon from "./EditSaveIcon";
 
@@ -26,7 +26,15 @@ export default function FinancialSubsection(
     in the numeric input
     */
     const [isEditing, setIsEditing] = useState<boolean>(false);
-    const [inputAmount, setInputAmount] = useState<string>(amount?.toString() || "");
+    const [inputAmount, setInputAmount] = useState<string>("");
+
+    /*
+    On initial and subsequent renders, updates the inputAmount state variable with 
+    the latest data represented by the amount prop
+    */
+    useEffect(() => {
+        setInputAmount(amount?.toString());
+    }, [amount]);
 
     /*
     Handler function to update the editing state and the input amount entered in 
@@ -34,7 +42,7 @@ export default function FinancialSubsection(
     */
     const handleSave = () => {
         setIsEditing(false);
-        const numericInputAmount = (parseFloat(inputAmount) || 0);
+        const numericInputAmount = parseFloat(inputAmount);
         onSave(sectionId, subsectionId, numericInputAmount);
     };
 
