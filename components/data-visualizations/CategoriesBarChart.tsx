@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Dimensions, View, Text, StyleSheet, Platform } from "react-native";
-import { retrieveFinancialData } from "@/data/cloud-firestore-service";
+import { subscribeToFinancialDataUpdates } from "@/data/cloud-firestore-service";
 import { BarChart } from "react-native-chart-kit";
 
 // Retrieves the screen's width and height properties for responsive layout
@@ -27,38 +27,43 @@ export default function CategoriesBarChart() {
     exists, calculate the total for each financial section by adding its 
     respective subsections together and updating the corresponding state variable 
     with the data
+
+    Also, establishes a listener to subscribe to real-time updates, thus 
+    automatically re-renders when the authenticated user's saved financial data is 
+    updated. Cleans up the listener when the component unmounts
     */
     useEffect(() => {
-        const fetchFinancialData = async () => {
-            const fetchedFinancialData = await retrieveFinancialData();
-            if (fetchedFinancialData) {
-                let sectionsTotal: number[] = [];
-                let sectionLabels: number[] = [];
-                let currentSectionLabel = 1;
+        const unsubscribe = subscribeToFinancialDataUpdates(
+            (fetchedFinancialData) => {
+                if (fetchedFinancialData) {
+                    let sectionsTotal: number[] = [];
+                    let sectionLabels: number[] = [];
+                    let currentSectionLabel = 1;
 
-                fetchedFinancialData.sections.forEach(section => {
-                    let sectionTotal = 0;
-                    section.subsections.forEach(subsection => {
-                        sectionTotal += subsection.amount;
+                    fetchedFinancialData.sections.forEach(section => {
+                        let sectionTotal = 0;
+                        section.subsections.forEach(subsection => {
+                            sectionTotal += subsection.amount;
+                        });
+                        sectionsTotal.push(sectionTotal);
+                        sectionLabels.push(currentSectionLabel);
+                        currentSectionLabel += 1;
                     });
-                    sectionsTotal.push(sectionTotal);
-                    sectionLabels.push(currentSectionLabel);
-                    currentSectionLabel += 1;
-                });
 
-                const data = {
-                    labels: sectionLabels,
-                    datasets: [{ data: sectionsTotal }]
-                };
-                setCategoriesData(data);
-            }
+                    const data = {
+                        labels: sectionLabels,
+                        datasets: [{ data: sectionsTotal }]
+                    };
+                    setCategoriesData(data);
+                }
 
-            if (Platform.OS === "web") {
-                setBarPercentageValue(1);
-            }
-        }
+                if (Platform.OS === "web") {
+                    setBarPercentageValue(1);
+                }
+            },
+        );
 
-        fetchFinancialData();
+        return () => unsubscribe();
     }, []);
 
     // Doesn't render the BarChart component if no saved financial data exists
