@@ -9,8 +9,7 @@ const height = Dimensions.get("window").height;
 // Data to be displayed separately by the Carousel component
 const data = ["Section 1", "Section 2", "Section 3"];
 
-export default function Analytics()
-{
+export default function Analytics() {
     // Keeps track of the Carousel component's progress for the pagination dots
     const progress = useSharedValue<number>(0);
 

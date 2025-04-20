@@ -4,8 +4,7 @@ import { financialSectionsData } from "@/data/financial-sections-data";
 import { retrieveFinancialData } from "@/data/cloud-firestore-service";
 import FinancialCarousel from "@/components/FinancialCarousel";
 
-export default function Financials()
-{
+export default function Financials() {
     /*
     State variable to hold the financial section data that will be display in the
     FinancialCarousel component and is pass in as a prop

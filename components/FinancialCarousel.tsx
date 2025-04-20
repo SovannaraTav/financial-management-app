@@ -26,8 +26,7 @@ type Props = {
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-export default function FinancialCarousel({ sections } : Props)
-{
+export default function FinancialCarousel({ sections } : Props) {
     // Keeps track of the carousel's progress for the pagination dots
     const progress = useSharedValue<number>(0);
 

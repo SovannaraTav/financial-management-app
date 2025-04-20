@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function Info()
-{
+export default function Info() {
     return (
         <View style={styles.container}>
             <Text>Info Screen.</Text>

@@ -4,8 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { auth } from "@/firebaseConfig";
 import { signOut, AuthError } from "firebase/auth";
 
-export default function SignOutButton()
-{
+export default function SignOutButton() {
     // Initialized router instance to enable navigation between screens
     const router = useRouter();
 
