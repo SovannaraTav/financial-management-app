@@ -1,25 +1,24 @@
 import { useState, useEffect } from "react";
 import { Dimensions, View, Text, StyleSheet, Platform } from "react-native";
 import { subscribeToFinancialDataUpdates } from "@/data/cloud-firestore-service";
-import { BarChart } from "react-native-chart-kit";
+import { StackedBarChart } from "react-native-chart-kit";
 
 // Retrieves the screen's width and height properties for responsive layout
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-export default function CategoriesBarChart() {
-    // State variables to pass in as props to the BarChart component
+export default function StackedCategoriesBarChart() {
+    // State variables to pass in as props to the StackedCategoriesBarChart component
     const [categoriesData, setCategoriesData] = useState<any>(null);
     const [barPercentageValue, setBarPercentageValue] = useState<number>(0.5);
 
-    // Establishes the chart style object's properties for the BarChart component
+    /*
+    Establishes the chart style object's properties for the StackedCategoriesBarChart 
+    component
+    */
     const chartConfig = {
         backgroundGradientFrom: "#f2f2f2",
         backgroundGradientTo: "#f2f2f2",
-        fillShadowGradientFrom: "#007bff",
-        fillShadowGradientFromOpacity: 1,
-        fillShadowGradientTo: "#007bff",
-        fillShadowGradientToOpacity: 1,
         color: () => "#000000",
         barPercentage: barPercentageValue,
     };
@@ -27,9 +26,9 @@ export default function CategoriesBarChart() {
     /*
     On initial render, attempts to fetch an authenticated user's saved financial 
     data through Google Firebase's NoSQL Cloud Firestore database service. If it 
-    exists, calculate the total for each financial section by adding its 
-    respective subsections together and updating the corresponding state variable 
-    with the data
+    exists, it normalizes the amounts of each financial section's subsections to 
+    percentages out of 100%, representing the portion each subsection contributes 
+    to the section's total
 
     Also, establishes a listener to subscribe to real-time updates, thus 
     automatically re-renders when the authenticated user's saved financial data is 
@@ -39,24 +38,30 @@ export default function CategoriesBarChart() {
         const unsubscribe = subscribeToFinancialDataUpdates(
             (fetchedFinancialData) => {
                 if (fetchedFinancialData) {
-                    let sectionsTotal: number[] = [];
+                    let sections: number[][] = [];
                     let sectionLabels: number[] = [];
                     let currentSectionLabel = 1;
 
                     fetchedFinancialData.sections.forEach(section => {
-                        let sectionTotal = 0;
+                        let sectionData: number[] = [];
                         section.subsections.forEach(subsection => {
-                            sectionTotal += subsection.amount;
+                            sectionData.push(subsection.amount);
                         });
 
-                        sectionsTotal.push(sectionTotal);
+                        const sectionDataTotal = sectionData.reduce((total, value) => total + value, 0);
+                        const normalizedSectionData = (sectionDataTotal > 0 
+                            ? sectionData.map(value => (value / sectionDataTotal) * 100) 
+                            : sectionData.map(() => 0));
+
+                        sections.push(normalizedSectionData);
                         sectionLabels.push(currentSectionLabel);
                         currentSectionLabel += 1;
                     });
 
                     const data = {
                         labels: sectionLabels,
-                        datasets: [{ data: sectionsTotal }]
+                        data: sections,
+                        barColors: ["#9b59b6", "#2980b9", "#e67e22", "#27ae60", "#c0392b"]
                     };
                     setCategoriesData(data);
                 }
@@ -76,29 +81,40 @@ export default function CategoriesBarChart() {
     }
 
     return (
-        <View>
-            <Text style={styles.title}>1️⃣ Total by Financial Categories</Text>
-            <BarChart 
+        <View style={styles.container}>
+            <Text style={styles.title}>2️⃣ Stacked Percentages by Financial Categories</Text>
+            <Text style={styles.legend}>🟪 Subsection 1</Text>
+            <Text style={styles.legend}>🟦 Subsection 2</Text>
+            <Text style={styles.legend}>🟧 Subsection 3</Text>
+            <Text style={styles.legend}>🟩 Subsection 4</Text>
+            <Text style={styles.legend}>🟥 Subsection 5</Text>
+
+            <StackedBarChart 
                 data={categoriesData}
                 width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}
                 height={height * 0.6}
-                fromZero={true}
-                yAxisLabel="$"
-                yAxisSuffix=""
-                horizontalLabelRotation={-90}
+                yAxisSuffix="%"
+                decimalPlaces={0}
+                segments={20}
                 chartConfig={chartConfig}
-                showValuesOnTopOfBars={true}
+                hideLegend={true}
             />
         </View>
     );
 }
 
-// Styling properties and values for the CategoriesBarChart component
+// Styling properties and values for the StackedCategoriesBarChart component
 const styles = StyleSheet.create({
+    container: {
+        alignItems: "center"
+    },
     title: {
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        marginBottom: 50
+        marginBottom: 10
+    },
+    legend: {
+        marginBottom: 5
     }
 });
