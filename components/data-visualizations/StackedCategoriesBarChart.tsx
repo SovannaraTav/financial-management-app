@@ -75,14 +75,17 @@ export default function StackedCategoriesBarChart() {
         return () => unsubscribe();
     }, []);
 
-    // Doesn't render the BarChart component if no saved financial data exists
+    /*
+    Doesn't render the StackedCategoriesBarChart component if no saved financial 
+    data exists
+    */
     if (!categoriesData) {
         return null;
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>2️⃣ Stacked Percentages by Financial Categories</Text>
+            <Text style={styles.title}>3️⃣ Stacked Percentages by Financial Categories</Text>
             <Text style={styles.legend}>🟪 Subsection 1</Text>
             <Text style={styles.legend}>🟦 Subsection 2</Text>
             <Text style={styles.legend}>🟧 Subsection 3</Text>
@@ -92,7 +95,7 @@ export default function StackedCategoriesBarChart() {
             <StackedBarChart 
                 data={categoriesData}
                 width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}
-                height={height * 0.6}
+                height={Platform.OS !== "web" ? height * 0.4 :height * 0.6}
                 yAxisSuffix="%"
                 decimalPlaces={0}
                 segments={20}

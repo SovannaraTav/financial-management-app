@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
 import { Dimensions, View, Text, StyleSheet, Platform } from "react-native";
 import { subscribeToFinancialDataUpdates } from "@/data/cloud-firestore-service";
-import { BarChart } from "react-native-chart-kit";
+import { PieChart } from "react-native-chart-kit";
 
 // Retrieves the screen's width and height properties for responsive layout
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-export default function CategoriesBarChart() {
-    // State variables to pass in as props to the BarChart component
+export default function EarningsSavingsExpensesPieChart() {
+    /*
+    State variable to pass in as props to the EarningsSavingsExpensesPieChart 
+    component
+    */
     const [categoriesData, setCategoriesData] = useState<any>(null);
-    const [barPercentageValue, setBarPercentageValue] = useState<number>(0.5);
 
-    // Establishes the chart style object's properties for the BarChart component
+    /*
+    Establishes the chart style object's properties for the 
+    EarningsSavingsExpensesPieChart component
+    */
     const chartConfig = {
         backgroundGradientFrom: "#f2f2f2",
         backgroundGradientTo: "#f2f2f2",
-        fillShadowGradientFrom: "#007bff",
-        fillShadowGradientFromOpacity: 1,
-        fillShadowGradientTo: "#007bff",
-        fillShadowGradientToOpacity: 1,
         color: () => "#000000",
-        barPercentage: barPercentageValue,
     };
 
     /*
@@ -29,7 +29,8 @@ export default function CategoriesBarChart() {
     data through Google Firebase's NoSQL Cloud Firestore database service. If it 
     exists, calculate the total for each financial section by adding its 
     respective subsections together and updating the corresponding state variable 
-    with the data
+    with the data after assigning each financial section total to either the 
+    earnings, savings/investments, or expenses category objects
 
     Also, establishes a listener to subscribe to real-time updates, thus 
     automatically re-renders when the authenticated user's saved financial data is 
@@ -40,8 +41,6 @@ export default function CategoriesBarChart() {
             (fetchedFinancialData) => {
                 if (fetchedFinancialData) {
                     let sectionsTotal: number[] = [];
-                    let sectionLabels: number[] = [];
-                    let currentSectionLabel = 1;
 
                     fetchedFinancialData.sections.forEach(section => {
                         let sectionTotal = 0;
@@ -50,19 +49,28 @@ export default function CategoriesBarChart() {
                         });
 
                         sectionsTotal.push(sectionTotal);
-                        sectionLabels.push(currentSectionLabel);
-                        currentSectionLabel += 1;
                     });
 
-                    const data = {
-                        labels: sectionLabels,
-                        datasets: [{ data: sectionsTotal }]
-                    };
+                    const data = [
+                        {
+                            name: "Earnings",
+                            total: sectionsTotal[0],
+                            color: "#27ae60"
+                        },
+                        {
+                            name: "Savings/Invests",
+                            total: sectionsTotal[6],
+                            color: "gray"
+                        },
+                        {
+                            name: "Expenses",
+                            total: 
+                                (sectionsTotal[1] + sectionsTotal[2] + sectionsTotal[3] + sectionsTotal[4] 
+                                + sectionsTotal[5] + sectionsTotal[7] + sectionsTotal[8] + sectionsTotal[9]),
+                            color: "#c0392b"
+                        }
+                    ];
                     setCategoriesData(data);
-                }
-
-                if (Platform.OS === "web") {
-                    setBarPercentageValue(1.25);
                 }
             },
         );
@@ -70,30 +78,31 @@ export default function CategoriesBarChart() {
         return () => unsubscribe();
     }, []);
 
-    // Doesn't render the BarChart component if no saved financial data exists
+    /*
+    Doesn't render the EarnginsSavingsExpensesPieChart component if no saved 
+    financial data exists
+    */
     if (!categoriesData) {
         return null;
     }
 
     return (
         <View>
-            <Text style={styles.title}>2️⃣ Total by Financial Categories</Text>
-            <BarChart 
+            <Text style={styles.title}>1️⃣ Financial Overview</Text>
+            <PieChart 
                 data={categoriesData}
                 width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}
-                height={height * 0.6}
-                fromZero={true}
-                yAxisLabel="$"
-                yAxisSuffix=""
-                horizontalLabelRotation={-90}
+                height={Platform.OS !== "web" ? height * 0.2 : height * 0.6}
                 chartConfig={chartConfig}
-                showValuesOnTopOfBars={true}
+                accessor={"total"}
+                backgroundColor={"none"}
+                paddingLeft={"0"}
             />
         </View>
     );
 }
 
-// Styling properties and values for the CategoriesBarChart component
+// Styling properties and values for the EarnginsSavingsExpensesPieChart component
 const styles = StyleSheet.create({
     title: {
         fontSize: 20,
