@@ -21,7 +21,7 @@ export default function CategoriesBarChart() {
         fillShadowGradientTo: "#007bff",
         fillShadowGradientToOpacity: 1,
         color: () => "#000000",
-        barPercentage: barPercentageValue,
+        barPercentage: barPercentageValue
     };
 
     /*
@@ -77,7 +77,7 @@ export default function CategoriesBarChart() {
 
     return (
         <View>
-            <Text style={styles.title}>2️⃣ Total by Financial Categories</Text>
+            <Text style={styles.title}> 1️⃣ Total by Financial Categories</Text>
             <BarChart 
                 data={categoriesData}
                 width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}
@@ -85,7 +85,7 @@ export default function CategoriesBarChart() {
                 fromZero={true}
                 yAxisLabel="$"
                 yAxisSuffix=""
-                horizontalLabelRotation={-90}
+                horizontalLabelRotation={Platform.OS !== "web" ? -45 : 0}
                 chartConfig={chartConfig}
                 showValuesOnTopOfBars={true}
             />
@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        marginBottom: 50
+        marginBottom: 10
     }
 });

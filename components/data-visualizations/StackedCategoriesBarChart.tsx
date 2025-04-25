@@ -20,7 +20,7 @@ export default function StackedCategoriesBarChart() {
         backgroundGradientFrom: "#f2f2f2",
         backgroundGradientTo: "#f2f2f2",
         color: () => "#000000",
-        barPercentage: barPercentageValue,
+        barPercentage: barPercentageValue
     };
 
     /*
@@ -84,8 +84,8 @@ export default function StackedCategoriesBarChart() {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>3️⃣ Stacked Percentages by Financial Categories</Text>
+        <View>
+            <Text style={styles.title}> 2️⃣ Stacked Percentages by Financial Categories</Text>
             <Text style={styles.legend}>🟪 Subsection 1</Text>
             <Text style={styles.legend}>🟦 Subsection 2</Text>
             <Text style={styles.legend}>🟧 Subsection 3</Text>
@@ -108,9 +108,6 @@ export default function StackedCategoriesBarChart() {
 
 // Styling properties and values for the StackedCategoriesBarChart component
 const styles = StyleSheet.create({
-    container: {
-        alignItems: "center"
-    },
     title: {
         fontSize: 20,
         fontWeight: "bold",
@@ -118,6 +115,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     legend: {
+        textAlign: "center",
         marginBottom: 5
     }
 });

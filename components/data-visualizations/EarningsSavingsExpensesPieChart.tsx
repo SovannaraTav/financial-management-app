@@ -21,7 +21,7 @@ export default function EarningsSavingsExpensesPieChart() {
     const chartConfig = {
         backgroundGradientFrom: "#f2f2f2",
         backgroundGradientTo: "#f2f2f2",
-        color: () => "#000000",
+        color: () => "#000000"
     };
 
     /*
@@ -88,7 +88,7 @@ export default function EarningsSavingsExpensesPieChart() {
 
     return (
         <View>
-            <Text style={styles.title}>1️⃣ Financial Overview</Text>
+            <Text style={styles.title}>3️⃣ Financial Summary</Text>
             <PieChart 
                 data={categoriesData}
                 width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}
@@ -108,6 +108,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        marginBottom: 50
+        marginBottom: 10
     }
 });
