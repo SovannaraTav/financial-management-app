@@ -88,7 +88,7 @@ export default function EarningsSavingsExpensesPieChart() {
 
     return (
         <View>
-            <Text style={styles.title}>3️⃣ Financial Summary</Text>
+            <Text style={styles.title}>3️⃣ Financial Health Summary</Text>
             <PieChart 
                 data={categoriesData}
                 width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}

@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import AppInformation from "@/components/AppInformation";
 
 export default function Info() {
     return (
         <View style={styles.container}>
-            <Text>Info Screen.</Text>
+            <AppInformation />
         </View>
     );
 }
@@ -13,6 +14,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center"
     }
 });
