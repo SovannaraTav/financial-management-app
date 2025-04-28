@@ -2,9 +2,17 @@ import { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { financialSectionsData } from "@/data/financial-sections-data";
 import { retrieveFinancialData } from "@/data/cloud-firestore-service";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import FinancialCarousel from "@/components/FinancialCarousel";
 
 export default function Financials() {
+    /*
+    Utilizes the custom useProtectedRoute() hook to determine whether to render 
+    this tab screen or redirect the user to the sign-in screen based on their 
+    authentication status
+    */
+    useProtectedRoute();
+
     /*
     State variable to hold the financial section data that will be display in the
     FinancialCarousel component and is pass in as a prop

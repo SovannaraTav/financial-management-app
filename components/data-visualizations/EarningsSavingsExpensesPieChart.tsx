@@ -80,10 +80,18 @@ export default function EarningsSavingsExpensesPieChart() {
 
     /*
     Doesn't render the EarnginsSavingsExpensesPieChart component if no saved 
-    financial data exists
+    financial data exists, thus renders a text fallback option
     */
     if (!categoriesData) {
-        return null;
+        return (
+            <View>
+                <Text style={styles.fallbackDescription}>
+                    [3] <Text style={styles.bold}>Financial Health Summary</Text> will 
+                    be rendered once new data has been entered and saved in the financials 
+                    tab screen.
+                </Text>
+            </View>
+        );
     }
 
     return (
@@ -104,6 +112,12 @@ export default function EarningsSavingsExpensesPieChart() {
 
 // Styling properties and values for the EarnginsSavingsExpensesPieChart component
 const styles = StyleSheet.create({
+    fallbackDescription: {
+        fontSize: 16
+    },
+    bold: {
+        fontWeight: "bold"
+    },
     title: {
         fontSize: 20,
         fontWeight: "bold",

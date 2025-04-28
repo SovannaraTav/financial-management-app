@@ -17,12 +17,12 @@ type Props = {
 Regular expressions for real-time validation of the email and password inputs for the 
 AuthenticationForm component
 */
-const emailRegex = /^[a-zA-Z\d._%+-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+const emailRegex = /^[a-zA-Z\d._%+-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,3}$/;
 const passwordRegex = 
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{12,64}$/;
 
 // Email and password error messages for the AuthenticationForm component
-const emailErrorMessage = "Invalid format. Must include @ and end with an email domain";
+const emailErrorMessage = "Invalid format. Must include @ and end with a valid email domain";
 const passwordErrorMessage = 
     "Length between 12 to 64 characters. At least one lowercase, uppercase, number, and special character";
 

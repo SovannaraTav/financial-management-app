@@ -11,6 +11,9 @@ export default function RootLayout() {
                 <Stack.Screen name="sign-in" options={{ title: "Sign-In" }} />
                 <Stack.Screen name="sign-up" options={{ title: "Sign-Up" }} />
 
+                {/* Page not found screen that appears for invalid/non-existent routes */}
+                <Stack.Screen name="+not-found" options={{ title: "Page Not Found" }} />
+
                 {/* Tab navigator component of the app upon successfully signing in */}
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             </Stack>
