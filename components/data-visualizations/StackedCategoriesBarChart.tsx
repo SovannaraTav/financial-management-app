@@ -81,7 +81,7 @@ export default function StackedCategoriesBarChart() {
     */
     if (!categoriesData) {
         return (
-            <View>
+            <View style={styles.fallbackContainer}>
                 <Text style={styles.fallbackDescription}>
                     [2] <Text style={styles.bold}>Stacked Percentages by Financial Categories</Text> will 
                     be rendered once new data has been entered and saved in the financials tab screen.
@@ -101,7 +101,7 @@ export default function StackedCategoriesBarChart() {
 
             <StackedBarChart 
                 data={categoriesData}
-                width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}
+                width={Platform.OS !== "web" ? width * 0.9 : width * 0.6}
                 height={Platform.OS !== "web" ? height * 0.4 :height * 0.6}
                 yAxisSuffix="%"
                 decimalPlaces={0}
@@ -115,6 +115,10 @@ export default function StackedCategoriesBarChart() {
 
 // Styling properties and values for the StackedCategoriesBarChart component
 const styles = StyleSheet.create({
+    fallbackContainer: {
+        width: (width * 0.9),
+        alignItems: "center"
+    },
     fallbackDescription: {
         fontSize: 16
     },

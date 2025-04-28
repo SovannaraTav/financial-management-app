@@ -84,7 +84,7 @@ export default function EarningsSavingsExpensesPieChart() {
     */
     if (!categoriesData) {
         return (
-            <View>
+            <View style={styles.fallbackContainer}>
                 <Text style={styles.fallbackDescription}>
                     [3] <Text style={styles.bold}>Financial Health Summary</Text> will 
                     be rendered once new data has been entered and saved in the financials 
@@ -99,7 +99,7 @@ export default function EarningsSavingsExpensesPieChart() {
             <Text style={styles.title}>3️⃣ Financial Health Summary</Text>
             <PieChart 
                 data={categoriesData}
-                width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}
+                width={Platform.OS !== "web" ? width * 0.9 : width * 0.6}
                 height={Platform.OS !== "web" ? height * 0.2 : height * 0.6}
                 chartConfig={chartConfig}
                 accessor={"total"}
@@ -112,6 +112,10 @@ export default function EarningsSavingsExpensesPieChart() {
 
 // Styling properties and values for the EarnginsSavingsExpensesPieChart component
 const styles = StyleSheet.create({
+    fallbackContainer: {
+        width: (width * 0.9),
+        alignItems: "center"
+    },
     fallbackDescription: {
         fontSize: 16
     },

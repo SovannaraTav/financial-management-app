@@ -42,7 +42,11 @@ export default function FinancialSubsection(
     */
     const handleSave = () => {
         setIsEditing(false);
-        const numericInputAmount = parseFloat(inputAmount);
+        let numericInputAmount = parseFloat(inputAmount);
+        if (isNaN(numericInputAmount)) {
+            numericInputAmount = 0;
+            setInputAmount(numericInputAmount.toString());
+        }
         onSave(sectionId, subsectionId, numericInputAmount);
     };
 
@@ -63,7 +67,7 @@ export default function FinancialSubsection(
                     style={styles.textInput}
                     keyboardType="numeric"
                     returnKeyType="done"
-                    placeholder="Enter monthly USD amount here"
+                    placeholder="Enter monthly amount here"
                     placeholderTextColor="gray"
                     editable={isEditing}
                     value={inputAmount}
@@ -73,7 +77,7 @@ export default function FinancialSubsection(
                 <TextInput 
                     style={styles.textInput}
                     keyboardType="numeric"
-                    placeholder="Enter monthly USD amount here"
+                    placeholder="Enter monthly amount here"
                     placeholderTextColor="gray"
                     editable={isEditing}
                     value={inputAmount}

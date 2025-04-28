@@ -76,7 +76,7 @@ export default function CategoriesBarChart() {
     */
     if (!categoriesData) {
         return (
-            <View>
+            <View style={styles.fallbackContainer}>
                 <Text style={styles.fallbackDescription}>
                     [1] <Text style={styles.bold}>Total by Financial Categories</Text> will 
                     be rendered once new data has been entered and saved in the financials 
@@ -91,7 +91,7 @@ export default function CategoriesBarChart() {
             <Text style={styles.title}> 1️⃣ Total by Financial Categories</Text>
             <BarChart 
                 data={categoriesData}
-                width={Platform.OS !== "web" ? width * 0.9 : width * 0.5}
+                width={Platform.OS !== "web" ? width * 0.9 : width * 0.6}
                 height={height * 0.6}
                 fromZero={true}
                 yAxisLabel="$"
@@ -106,6 +106,10 @@ export default function CategoriesBarChart() {
 
 // Styling properties and values for the CategoriesBarChart component
 const styles = StyleSheet.create({
+    fallbackContainer: {
+        width: (width * 0.9),
+        alignItems: "center"
+    },
     fallbackDescription: {
         fontSize: 16
     },

@@ -1,7 +1,9 @@
 // Importing Google Firebase SDK modules
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Platform } from "react-native";
 
 // Google Firebase configuraton object
 const firebaseConfig = {
@@ -16,7 +18,8 @@ const firebaseConfig = {
 
 // Initializing Google Firebase app and its services 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const auth = (Platform.OS === "web" ? getAuth(app) : 
+    initializeAuth(app, { persistence: getReactNativePersistence(AsyncStorage) }));
 const db = getFirestore(app);
 
 // Exporting Google Firebase instances to be available for use in other files

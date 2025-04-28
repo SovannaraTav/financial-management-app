@@ -11,10 +11,11 @@ export default function AppInformation() {
             <Text style={styles.title}>1️⃣ Financials Tab Screen</Text>
             <Text style={styles.description}>
                 This screen features 10 financial categories to manage and keep track of. Each 
-                category consists of 5 subcategories with their corresponding number input field.
-                To input a monthly USD amount for a subcategory, select the edit icon above the 
-                number input field field, enter the amount, and save it using the save icon.
-                Your data will be saved and persist across sessions.
+                category consists of 5 subcategories. To input a monthly amount for a subcategory, 
+                select the edit icon above the number input field, enter the amount, and save it 
+                using the save icon. 
+                Your data will be saved and persist across sessions, thus there is no need to 
+                refresh the screen.
                 Swipe right to move forward and left to go back between categories.
             </Text>
 
@@ -22,7 +23,7 @@ export default function AppInformation() {
             <Text style={styles.title}>2️⃣ Analytics Tab Screen</Text>
             <Text style={styles.description}>
                 This screen features 3 real-time data visualizations based on data the entered 
-                in the financials tab screen:
+                in the financials tab screen, thus there is no need to refresh the screen:
                 
                 {"\n\n"}[1] <Text style={styles.bold}>Total by Financial Categories</Text>: 
                 A bar chart displaying the total sum of subcategories for each category. X-axis 
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width: width,
-        padding: 10
+        padding: 5
     },
     title: {
         fontSize: 18,
