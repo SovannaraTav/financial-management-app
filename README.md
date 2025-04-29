@@ -1,50 +1,50 @@
-# Welcome to your Expo app 👋
+# Financial Management App
+## Description
+**[1]** A cross-platform financial management app that allows users to manage and track monthly amounts across various financial categories and their subcategories.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**[2]** The app include financial categories such as:<br>
+1. Income 💰
+2. Housing 🏠
+3. Transportation 🚘
+4. Food & Dining 🍔
+5. Insurance 🛠
+6. Healthcare & Medical ❤
+7. Savings & Investments 📈
+8. Debt & Loans 📅
+9. Subscriptions & Memberships 💳
+10. Entertainment, Leisure, and Miscellaneous 🎨
 
-## Get started
+**[3]** Users can also analyze and visualize their financial data through data visualizations with real-time updates to gain actionable insights.
 
-1. Install dependencies
+**[4]** Available on Android, iOS, and the web.
 
-   ```bash
-   npm install
-   ```
+## Getting Started
+### [1] Access on the Web
+You can use the app directly on the web through EAS Hosting:<br> 
+👉 **[Financial Management App](https://financial-management-app.expo.app/)**
 
-2. Start the app
+### [2] Access on Android and iOS via Expo Go
+Follow these steps to run the app on a mobile platform:
+1. Install **[Expo Go](https://expo.dev/go)** on your Android/iOS physical device or emulator.
+2. Install **[Node.js](https://nodejs.org/en/)** on your computer to allow you to install the necessary dependencies for the app.
+3. Download this GitHub repository:
+   - Click the `<> Code` dropdown menu on this GitHub repository page.
+   - Select the "Download ZIP" option.
+4. Extract the ZIP and open the project folder in Visual Studio Code.
+5. Install the necessary dependencies defined in the ```package.json``` file by running ```npm install``` into the terminal.
+6. Start the development server by running ```npx expo start``` into the terminal, then follow the on-screen instructions to open the app on your Android/iOS physical device or emulator.
+7. Stop the development server by executing ```Ctrl + C``` into the terminal when your app session concludes.
+8. Repeat steps #6 and #7 to start a new app session.
 
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Tools and Technologies
+**[1]** TypeScript<br>
+**[2]** Node.js<br>
+**[3]** React Native<br>
+**[4]** React Native Reanimated Carousel<br>
+**[5]** React Native Chart Kit<br>
+**[6]** Expo<br>
+**[7]** Expo Go<br>
+**[8]** EAS Hosting<br>
+**[9]** Android Studio<br>
+**[10]** Visual Studio Code<br>
+**[11]** Google Firebase Services (Firebase Authentication & NoSQL Cloud Firestore)
