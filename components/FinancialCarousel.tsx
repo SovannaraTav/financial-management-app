@@ -76,7 +76,7 @@ export default function FinancialCarousel({ sections } : Props) {
             respective subsections separately */}
             <Carousel 
                 width={width * 0.9}
-                height={Platform.OS !== "web" ? height * 0.6 : height * 0.7}
+                height={Platform.OS !== "web" ? height * 0.6 : height * 0.75}
                 data={financialData}
                 onProgressChange={progress}
                 renderItem={({ item }) => (
