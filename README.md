@@ -16,14 +16,18 @@
 
 **[3]** Users can also analyze and visualize their financial data through data visualizations with real-time updates to gain actionable insights.
 
-**[4]** Available on Android, iOS, and the web.
+**[4]** Available on Android, iOS, and the Web.
 
 ## Getting Started
-### [1] Access on the Web
-You can use the app directly on the web through EAS Hosting:<br> 
+### [1] Demo Presentation Slides
+You can preview the app directly through the provided PDF file:<br>
+👉 **[Demo Presentation Slides](FinancialManagementApp_DemoPresentation.pdf)**
+
+### [2] Access on the Web
+You can use the app directly on the web for desktop computers and laptops through EAS Hosting:<br> 
 👉 **[Financial Management App](https://financial-management-app.expo.app/)**
 
-### [2] Access on Android and iOS via Expo Go
+### [3] Access on Android and iOS via Expo Go
 Follow these steps to run the app on a mobile platform:
 1. Install **[Expo Go](https://expo.dev/go)** on your Android/iOS physical device or emulator.
 2. Install **[Node.js](https://nodejs.org/en/)** on your computer to allow you to install the necessary dependencies for the app.
